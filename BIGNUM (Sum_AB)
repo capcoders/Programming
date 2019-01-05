@@ -1,0 +1,45 @@
+////////////////////////////
+
+#include <iostream>
+#include <stdio.h>
+using namespace std;
+string a, b, c;
+
+int main()
+{
+    freopen("SUM_AB.inp","r",stdin);
+    freopen("SUM_AB.out","w",stdout);
+
+    getline(cin, a);
+    getline(cin, b);
+
+    while (a.size() != b.size()){
+        if (a.size() < b.size())
+            a = '0' + a;
+        else
+            b = '0' + b;
+    }
+
+    a = '0' + a;
+    b = '0' + b;
+
+    int tmp, remember = 0, n = a.size()-1;
+
+    for (int i = n; i >= 0; i --){
+        if (remember == 1)
+            tmp = (int)(a[i]-48) + (int)(b[i]-48) + 1;
+        else
+            tmp = (int)(a[i]-48) + (int)(b[i]-48);
+            
+        if (tmp > 9)
+            remember = 1;
+        else
+            remember = 0;
+            
+        c = (char)(tmp%10+48) + c;
+    }
+
+    cout << c;
+
+    return 0;
+}
