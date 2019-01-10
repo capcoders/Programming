@@ -1,0 +1,56 @@
+#include <iostream>
+#include <stdio.h>
+#define min(a,b,c) min(min(a,b),c)
+using namespace std;
+string x, y;
+int n, m, F[10000][10000];
+
+void Setup()
+{
+    n = x.size();
+    m = y.size();
+    x = ' ' + x;
+    y = ' ' + y;
+
+    for (int i = 1; i <= n; i ++){
+        F[i][0] = i;
+    }
+    for (int i = 1; i <= m; i ++){
+        F[0][i] = i;
+    }
+}
+
+void Solve()
+{
+    for (int i = 1; i <= n; i ++){
+        for (int j = 1; j <= m; j ++){
+            if (x[i] == y[j]){
+                F[i][j] = F[i-1][j-1];
+            }
+            else{
+                F[i][j] = min(F[i-1][j],F[i][j-1],F[i-1][j-1]) + 1;
+            }
+        }
+    }
+
+}
+
+void Output()
+{
+    cout << F[n][m] << endl;
+}
+
+int main()
+{
+    freopen("STR.inp","r",stdin);
+    freopen("STR.out","w",stdout);
+
+    getline(cin, x);
+    getline(cin, y);
+
+    Setup();
+    Solve();
+    Output();
+
+    return 0;
+}
